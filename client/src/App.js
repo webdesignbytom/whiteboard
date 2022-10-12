@@ -1,5 +1,6 @@
-import React, { createElement, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import rough from 'roughjs/bundled/rough.esm';
+import Header from './components/header/Header';
 
 const generator = rough.generator();
 
@@ -17,8 +18,10 @@ function shapeSelector(x1, y1, x2, y2, type) {
 
 
 function createNewElement(x1, y1, x2, y2, type) {
+
   const roughElement = shapeSelector(x1, y1, x2, y2, type)
   console.log('rough', roughElement);
+
   return { x1, y1, x2, y2, roughElement };
 }
 
@@ -81,29 +84,7 @@ function App() {
 
   return (
     <div>
-      <div style={{ position: 'fixed' }}>
-        <input
-          type='radio'
-          id='line'
-          checked={elementType === 'line'}
-          onChange={() => setElementType('line')}
-        />
-        <label htmlFor='line'>Line</label>
-        <input
-          type='radio'
-          id='rectangle'
-          checked={elementType === 'rectangle'}
-          onChange={() => setElementType('rectangle')}
-        />
-        <label htmlFor='rectangle'>Rectangle</label>
-        <input
-          type='radio'
-          id='arc'
-          checked={elementType === 'arc'}
-          onChange={() => setElementType('arc')}
-        />
-        <label htmlFor='line'>Circle</label>
-      </div>
+    <Header elementType={elementType} setElementType={setElementType} />
 
       <canvas
         id='canvas'
